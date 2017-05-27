@@ -23,10 +23,10 @@
   width:20px;
   height:20px;
   vertical-align: middle;
-  
+
 }
 .post{
-  background-image: url(https://static.xx.fbcdn.net/rsrc.php/v3/ye/r/WtR-0YU_X8H.png)""
+  background-image: "url(https://static.xx.fbcdn.net/rsrc.php/v3/ye/r/WtR-0YU_X8H.png)";
   background-size: -21px -55px;
   background-position: 104px 108px;
 }
