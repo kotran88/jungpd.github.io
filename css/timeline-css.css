@@ -1,3 +1,23 @@
 .cover-photo{
   height:180px;
 }
+.profile-photo-down{
+  display:inline-block;
+  position : relative;
+  width:120px;
+  height:120px;
+}
+.profile-inner{
+  vertical-align: bottom;
+
+}
+.profile-frame{
+  border-radius: 4px;
+  box-shadow: 0 1px 2px rgba(0,0,0,.125);
+  display:block;
+  background-size: auto;
+  background-color: #fff;
+  height:116px;
+  margin-top: -50px;
+
+}

@@ -1,0 +1,32 @@
+.feature-list-inner{
+  position:relative;
+  z-index: 1;
+  display: flex;
+  border-top: 1px solid #f2f2f2;
+  width:inherit;
+  flex:1;
+  align-items: center;
+}
+.feature-item{
+  width:93.5px;
+  height:inherit;
+  position:relative;
+  flex:1;
+}
+.feature-item-link{
+  width:93.5px;
+  height:60px;
+  line-height: 27px;
+  display:block;
+}
+.feature-item-icon{
+  width:20px;
+  height:20px;
+  vertical-align: middle;
+  
+}
+.post{
+  background-image: url(https://static.xx.fbcdn.net/rsrc.php/v3/ye/r/WtR-0YU_X8H.png)""
+  background-size: -21px -55px;
+  background-position: 104px 108px;
+}

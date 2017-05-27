@@ -4,10 +4,31 @@
 
     <meta name="viewport" content="width=device-width, initial-scale1=1.0">
     <link rel="stylesheet" href="./css/timeline-css.css">
+    <link rel="stylesheet" href="./css/base.css">
+    <link rel="stylesheet" href="./css/feature-list.css">
   </head>
   <title>title</title>
+  <script>
+    window.fbAsyncInit = function() {
+      FB.init({
+        appId            : '454315694916758',
+        autoLogAppEvents : true,
+        xfbml            : true,
+        version          : 'v2.9'
+      });
+      FB.AppEvents.logPageView();
+    };
 
+    (function(d, s, id){
+       var js, fjs = d.getElementsByTagName(s)[0];
+       if (d.getElementById(id)) {return;}
+       js = d.createElement(s); js.id = id;
+       js.src = "//connect.facebook.net/en_US/sdk.js";
+       fjs.parentNode.insertBefore(js, fjs);
+     }(document, 'script', 'facebook-jssdk'));
+  </script>
   <body>
+
     <div  class="timeline-cover">
       <div class="cover-photo">
         <img src="./images/foto.jpg" alt="" height="180px" width="100%">
@@ -22,8 +43,63 @@
         </div>
       </div>
     </div>
-    <div class="feature-list"></div>
-    <div class="profile-description"></div>
-    <div class="timeline-body"></div>
+    <div class="feature-list">
+      <div class="feature-list-inner">
+        <div class="feature-item">
+          <a class="feature-item-link" href="">
+            <i class="feature-item-icon post">  </i>
+              <span class="feature-item-name">
+                Post
+              </span>
+
+          </a>
+        </div>
+      </div>
+
+      <div>
+        <div>
+          <a href="">
+            <i>
+              <span>
+
+              </span>
+            </i>
+          </a>
+        </div>
+      </div>
+
+      <div>
+        <div>
+          <a href="">
+            <i>
+              <span>
+
+              </span>
+            </i>
+          </a>
+        </div>
+      </div>
+
+      <div>
+        <div>
+          <a href="">
+            <i>
+              <span>
+
+              </span>
+            </i>
+          </a>
+        </div>
+      </div>
+
+    </div>
+    <div class="profile-description">
+
+
+    </div>
+    <div class="timeline-body">
+<div class="fb-share-button" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button" data-size="large" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse">Share</a></div>
+      
+    </div>
   </body>
 </html>
