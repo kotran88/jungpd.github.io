@@ -1,1 +1,40 @@
-hello
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>test</title>
+  </head>
+  <style>
+  @@font-face {
+    font-family: SeoulNamsanFont;
+    src:url('SeoulNamsanL.ttf');
+  }
+  @@font-face {
+    font-family: SeoulNamsanFont;
+    src:url('SeoulNamsanEB.ttf');
+    font-weight: bold;
+  }
+  p{
+    font-family: SeoulNamsanFont;
+  }
+
+    @media (max-width:799px){
+      body{background-color: #ffffff}
+      #title:after{content:" :smartphone"}
+
+    }
+    @media only screen and (min-width:800px) and (max-width:1023px){
+      body{background-color: #CACACA}
+      #title:after{content:":tablet PC"}
+    }
+    @media only screen and (min-width:1024px){
+      body{background-color: #606060}
+      #title:after{content:":desktop PC"}
+      h1{color:#FFFFFF}
+    }
+  </style>
+  <body>
+    <p>이 문장은 웨폰트로 <b>"서울 남산체"</b>를 사용하였습니다.</p>
+    <h1 id="title"> 접속 기기 </h1>
+  </body>
+</html>
