@@ -25,7 +25,7 @@ app.get('/form',function(req,res){
 app.get("/gogo",function(req,res){
   console.log("aaa")
   fs.readFile('/index.html',function(error,data){
-    res.send(data.toString())
+    res.send(data)
   })
 })
 app.get("/db",function(req,res){
