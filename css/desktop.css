@@ -1,0 +1,39 @@
+@charset "UTF-8";
+.pg{
+  width:800px;
+  margin-right: auto;
+  margin-left: auto;
+}
+.head{
+  background-image: url(../image/title.jpg);
+  background-repeat: no-repeat;
+  width:800px;
+  height:264px;
+}
+.entries {
+  float:left;
+  width:680px;
+}
+.head h1{
+  display:none;
+}
+.sidebar ul{
+  list-style-type:none;
+}
+.sidebar{
+  float:left;
+  text-align: right;
+  width:100px;
+  margin-left: 1em;
+}
+.foot{
+  background-color: #333;
+  border-top-width:1px;
+  border-top-style: solid;
+  border-top-color: #999;
+  padding:10px;
+  color:#FFF;
+  margin-top:10px;
+  clear:left;
+  text-align: center;
+}
