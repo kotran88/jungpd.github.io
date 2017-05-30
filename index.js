@@ -25,6 +25,7 @@ app.get('/form',function(req,res){
 app.get("/gogo",function(req,res){
   console.log("aaa")
   fs.readFile('/index.html',function(error,data){
+    res.writeHead(200,{'Content-Type':'text/html'});
     res.send(data)
   })
 })
