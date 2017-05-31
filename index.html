@@ -37,10 +37,11 @@
           Kakao.API.request({
           url: '/v1/user/me',
           success: function(res) {
+            alert(res);
             alert(res.nickname);
             var name=JSON.stringify(res).nickname;
             alert(name);
-            alert(JSON.stringify(res));
+          
             
           },
           fail: function(error) {
