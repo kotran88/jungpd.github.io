@@ -37,21 +37,11 @@
           Kakao.API.request({
           url: '/v1/user/me',
           success: function(res) {
-            console.log("stringyfy before : "+res);
-            console.log("stringyfy before2 : "+res.kaccount_email);
             
-            console.log("stringyfy before3 : "+res.properties);
-            console.log("stringyfy before4 : "+res.properties.nickname);
-            
-            var data=JSON.stringify(res)
-            console.log("stringyfy after : "+data);
-            var a=JSON.parse(res);
-            var man = eval(a.kaccount_email);
-            console.log("man:"+man);
-            data = $.parseJSON(data);
-            var myJSONText = data.toJSONString();
-            console.log(myJSONText.properties.nickname);
-            console.log("data : "+data.properties.nickname);
+            var email=res.kaccount_email
+            var nickname=res.properties.nickname;
+            var photo=res.properties.profile_image;
+            $("#profile").attr("src",photo);
           
             
           },
@@ -68,6 +58,7 @@
   </script>
     <article class="pg-main">
       <section class="entries">
+        <img id="profile" src=""/>
         <h2>브라우저의 너비를 800px 미만으로 줄여보세요</h2>
         <p class="pcview_only"> 이 문장은 pc화면에서만 보입니다...이 문장은 pc화면에서만 보입니다... 이 문장은 pc화면에서만 보입니다...
       </p>
