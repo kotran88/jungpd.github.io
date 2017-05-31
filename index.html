@@ -37,7 +37,7 @@
           Kakao.API.request({
           url: '/v1/user/me',
           success: function(res) {
-            data = $.parseJSON(data);
+            data = $.parseJSON(res);
             alert(data.nickname);
             
             
