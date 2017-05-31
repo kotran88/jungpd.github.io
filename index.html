@@ -37,12 +37,12 @@
           Kakao.API.request({
           url: '/v1/user/me',
           success: function(res) {
-            console.log("stringyfy before : "+res);
+            console.log("stringyfy before : "+res.nicname);
             var data=JSON.stringify(res)
             console.log("stringyfy after : "+data);
             console.log("name : "+data.nickname);
             data = $.parseJSON(data);
-            console.log("data : "+data);
+            console.log("data : "+data.nickname);
           
             
           },
