@@ -25,8 +25,13 @@
         <h1>media art design</h1>
       </header>
       <a id="kakao-login-btn"></a>
-  <a href="http://developers.kakao.com/logout"></a>
+  <a href="http://developers.kakao.com/logout">데브로그아웃</a>
+      <p onclick="logout();">바로로그아웃</p>
   <script type='text/javascript'>
+    function logout(){
+      alert("fff");
+      Kakao.Auth.logout();
+    }
     //<![CDATA[
       // 사용할 앱의 JavaScript 키를 설정해 주세요.
       Kakao.init('61b64f0d22f150715ff1e73b874515d3');
