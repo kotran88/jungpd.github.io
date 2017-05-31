@@ -42,7 +42,6 @@
             console.log("stringyfy after : "+data);
             var man = eval(data.properties);
             console.log("man:"+man);
-            console.log("name : "+data.properties.nickname);
             data = $.parseJSON(data);
             var myJSONText = data.toJSONString();
             console.log(myJSONText.properties.nickname);
