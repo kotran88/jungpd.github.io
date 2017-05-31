@@ -27,10 +27,17 @@
       <a id="kakao-login-btn"></a>
   <a href="http://developers.kakao.com/logout">데브로그아웃</a>
       <p onclick="logout();">바로로그아웃</p>
+      <p onclick="getToken();">토큰확인</p>
   <script type='text/javascript'>
     function logout(){
       alert("fff");
       Kakao.Auth.logout();
+    }
+    function getToken(){
+      var accessToken=Kakao.Auth.getAccessToken()
+      var refreshToken=Kakao.Auth.getRefreshToken()
+      alert(accessToken+",,"+refreshToken);
+      
     }
     //<![CDATA[
       // 사용할 앱의 JavaScript 키를 설정해 주세요.
