@@ -18,27 +18,13 @@
   <body>
 
 
-  
-  hello hello world im pd
     <div class="pg">
       <header class="head">
         <h1>media art design</h1>
       </header>
       <a id="kakao-login-btn"></a>
-  <a href="http://developers.kakao.com/logout">데브로그아웃</a>
-      <p onclick="logout();">바로로그아웃</p>
-      <p onclick="getToken();">토큰확인</p>
+  <a href="http://developers.kakao.com/logout"></a>
   <script type='text/javascript'>
-    function logout(){
-      alert("fff");
-      Kakao.Auth.logout();
-    }
-    function getToken(){
-      var accessToken=Kakao.Auth.getAccessToken()
-      var refreshToken=Kakao.Auth.getRefreshToken()
-      alert(accessToken+",,"+refreshToken);
-      
-    }
     //<![CDATA[
       // 사용할 앱의 JavaScript 키를 설정해 주세요.
       Kakao.init('61b64f0d22f150715ff1e73b874515d3');
@@ -46,21 +32,7 @@
       Kakao.Auth.createLoginButton({
         container: '#kakao-login-btn',
         success: function(authObj) {
-          Kakao.API.request({
-          url: '/v1/user/me',
-          success: function(res) {
-            
-            var email=res.kaccount_email
-            var nickname=res.properties.nickname;
-            var photo=res.properties.profile_image;
-            $("#profile").attr("src",photo);
-          
-            
-          },
-          fail: function(error) {
-            alert(JSON.stringify(error));
-          }
-        });
+          alert(JSON.stringify(authObj));
         },
         fail: function(err) {
            alert(JSON.stringify(err));
@@ -70,7 +42,6 @@
   </script>
     <article class="pg-main">
       <section class="entries">
-        <img id="profile" src=""/>
         <h2>브라우저의 너비를 800px 미만으로 줄여보세요</h2>
         <p class="pcview_only"> 이 문장은 pc화면에서만 보입니다...이 문장은 pc화면에서만 보입니다... 이 문장은 pc화면에서만 보입니다...
       </p>
