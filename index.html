@@ -18,8 +18,8 @@
   <body>
 
 
-  
-  hello hello world im pd
+
+  hello hello world im pdsss
     <div class="pg">
       <header class="head">
         <h1>media art design</h1>
@@ -37,7 +37,7 @@
       var accessToken=Kakao.Auth.getAccessToken()
       var refreshToken=Kakao.Auth.getRefreshToken()
       alert(accessToken+",,"+refreshToken);
-      
+
     }
     //<![CDATA[
       // 사용할 앱의 JavaScript 키를 설정해 주세요.
@@ -49,13 +49,13 @@
           Kakao.API.request({
           url: '/v1/user/me',
           success: function(res) {
-            
+
             var email=res.kaccount_email
             var nickname=res.properties.nickname;
             var photo=res.properties.profile_image;
             $("#profile").attr("src",photo);
-          
-            
+
+
           },
           fail: function(error) {
             alert(JSON.stringify(error));

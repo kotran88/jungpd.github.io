@@ -11,7 +11,7 @@ app.get('/form',function(req,res){
         var output=`
         <html>
                 <body>
-                        <a href="/gogo" >db go to from node js & aws </a>
+                        <a href="/gogo" >dbbbbb go to from node js & aws </a>
                 </body>
         </html>
         `;
