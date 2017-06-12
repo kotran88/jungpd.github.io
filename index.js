@@ -21,6 +21,12 @@ app.get("/gogo",function(req,res){
   console.log("bbb")
     res.render('gogo');
 })
-app.listen(80,function(){
+
+app.get("/stat/:nickname",function(req,res){
+  console.log("nickname : "+req.params.nickname);
+  alert(req.params.nickname);
+
+})
+app.listen(8080,function(){
         console.log("connected");
 })
