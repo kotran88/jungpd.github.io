@@ -9,14 +9,36 @@
             src="https://code.jquery.com/jquery-3.2.1.min.js"
             integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
             crossorigin="anonymous"></script>
-    <link rel="stylesheet" type="text/css" href="./css/common.css">
-    <link rel="stylesheet" type="text/css" media="screen and (max-width:799px)" href="./css/mobile.css">
-    <link rel="stylesheet" type="text/css" media="screen and (min-width:800px)" href="./css/desktop.css">
-  </head>
-  <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
-
+      </head>
+      <script src="//cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js"></script>
   <body>
 
     {{result}}
+    <canvas id="myChart" width="300" height="200"></canvas>
+
+    <script>
+var data = {
+	labels: ["1월", "2월", "3월", "4월", "5월", "6월"],
+	datasets: [
+		{
+			label: "My First dataset",
+			fillColor: "rgba(150,200,250,0.5)",
+			strokeColor: "rgba(150,200,250,0.8)",
+			highlightFill: "rgba(150,200,250,0.75)",
+			highlightStroke: "rgba(150,200,250,1)",
+			data: [65, 59, 80, 81, 56, 55]
+		}
+	]
+};
+var options = {	animation: false };
+var ctx = $('#myChart').get(0).getContext('2d');
+var t='bar';
+var myBarChart = new Chart(ctx, {
+    type: t,
+    data: data,
+    options: options
+});
+
+</script>
   </body>
 </html>
