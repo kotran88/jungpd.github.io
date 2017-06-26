@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="user-scalable=no,width=device-width"/>
+    <title>test</title>
+    <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=uDg8DaCVRq5KnivRwm3z"></script>
+    <script
+            src="https://code.jquery.com/jquery-3.2.1.min.js"
+            integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+            crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" href="./css/common.css">
+    <link rel="stylesheet" type="text/css" media="screen and (max-width:799px)" href="./css/mobile.css">
+    <link rel="stylesheet" type="text/css" media="screen and (min-width:800px)" href="./css/desktop.css">
+  </head>
+  <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
+
+  <body>
+
+
+    <div class="pg">
+      <header class="head">
+        <h1>media art design</h1>
+      </header>
+      <a id="kakao-login-btn"></a>
+  <a href="http://developers.kakao.com/logout"></a>
+  <script type='text/javascript'>
+    //<![CDATA[
+      // 사용할 앱의 JavaScript 키를 설정해 주세요.
+      Kakao.init('61b64f0d22f150715ff1e73b874515d3');
+      // 카카오 로그인 버튼을 생성합니다.
+      Kakao.Auth.createLoginButton({
+        container: '#kakao-login-btn',
+        success: function(authObj) {
+          alert(JSON.stringify(authObj));
+        },
+        fail: function(err) {
+           alert(JSON.stringify(err));
+        }
+      });
+    //]]>
+  </script>
+    <article class="pg-main">
+      <section class="entries">
+        <h2>브라우저의 너비를 800px 미만으로 줄여보세요</h2>
+        <p class="pcview_only"> 이 문장은 pc화면에서만 보입니다...이 문장은 pc화면에서만 보입니다... 이 문장은 pc화면에서만 보입니다...
+      </p>
+        <p>이 문장은 모든 디바이스에서 보입니다...이 문장은 모든 디바이스에서 보입니다...이 문장은 모든 디바이스에서 보입니다...
+      </p>
+        <hr/>
+        <h2>반대로 브라우저의 너비를 800px 이상으로 늘려보세요</h2>
+        <p class="pcview_only">이 문장은 모든 디바이스 화면에서...</p>
+        <p class="pcview_only"> 이 문장은 모든 디바이스 화면에서...</p>
+      </section>
+      <nav class="sidebar">
+        <h3>SNS registration</h3>
+        <ul>
+          <li><a href="#">facebook</a></li>
+          <li><a href="#">twitter</a></li>
+        </ul>
+        <h3>카테고리</h3>
+        <ul>
+          <li><a href="#">digital art</a></li>
+          <li><a href="#">sound art</a></li>
+          <li><a href="#">information visualize art</a></li>
+          <li><a href="#">new media art</a></li>
+        </ul>
+      </nav>
+    </article>
+    <div id="map" style="width:100%;height:400px;"></div>
+
+   <script>
+   var mapOptions = {
+       center: new naver.maps.LatLng(37.3595704, 127.105399),
+        zoom: 5,
+   mapTypeId: naver.maps.MapTypeId.NORMAL
+   };
+
+   var map = new naver.maps.Map('map', mapOptions);
+var infowindow = new naver.maps.InfoWindow();
+
+function onSuccessGeolocation(position) {
+   var location = new naver.maps.LatLng(position.coords.latitude,
+                                        position.coords.longitude);
+   map.setCenter(location); // 얻은 좌표를 지도의 중심으로 설정합니다.
+   map.setZoom(10); // 지도의 줌 레벨을 변경합니다.
+   infowindow.setContent('<div style="padding:20px;"><p style="margin-bottom:5px;color:#f00;"> '+position.coords.latitude+' long'+position.coords.longitude+'</p></div>');
+   infowindow.open(map, location);
+}
+
+function onErrorGeolocation() {
+   var center = map.getCenter();
+
+   infowindow.setContent('<div style="padding:20px;">' +
+       '<h5 style="margin-bottom:5px;color:#f00;">Geolocation failed!</h5>'+ "latitude: "+ center.lat() +"<br /><h5>longitude: "+ center.lng() +'</h5></div>');
+
+   infowindow.open(map, center);
+
+   infowindow.setContent('<p>issssssssssssssng...</p>');
+   infowindow.open(map, location);
+}
+
+$(window).on("load", function() {
+   if (navigator.geolocation) {
+       navigator.geolocation.getCurrentPosition(onSuccessGeolocation, onErrorGeolocation);
+   } else {
+       var center = map.getCenter();
+
+       infowindow.setContent('<div style="padding:20px;"><h5 style="margin-bottom:5px;color:#f00;">Geolocation not supported</h5>'+ "latitude: "+ center.lat() +"<br />longitude: "+ center.lng() +'</div>');
+       infowindow.open(map, center);
+   }
+});
+   </script>
+    <footer class="foot">
+      <p>Copyright</p>
+    </footer>
+    </div>
+  </body>
+</html>
