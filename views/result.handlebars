@@ -5,40 +5,244 @@
     <meta name="viewport" content="user-scalable=no,width=device-width"/>
     <title>test</title>
     <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=uDg8DaCVRq5KnivRwm3z"></script>
-    <script
-            src="https://code.jquery.com/jquery-3.2.1.min.js"
-            integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
-            crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
       </head>
       <script src="//cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js"></script>
   <body>
 
-    {{result}}
-    <canvas id="myChart" width="300" height="200"></canvas>
+    {{nickname}}
+
+
+<hr>
+<p id="graphName">총 운동 시간 그래프</p>
+<canvas id="myChart" width="300" height="200"></canvas>
+<hr>
+
+<div class="table-responsive">
+  <table class="table">
+  <tr>
+<td>운동명</td>
+<td>운동시간</td>
+<td>횟수</td>
+<td>운동일</td>
+  </tr>
+
+{{#result }}
+{{#each girls}}
+<tr onclick="javascript:change('{{this.title}}')">
+  <td>{{this.title}}</td>
+  <td>{{this.time}}</td>
+  <td>dddd</td>
+  <td>{{this.create_time}}</td>
+</tr>
+{{/each}}
+
+{{/result}}
+</table>
+</div>
+
+<hr>
+<canvas id="myPie" width="300" height="200"></canvas>
 
     <script>
+    var displayed_date=[];
+    var displayed_datee=[];
+    var array_date=[];
+    var array_time=[];
+    var array_title=[];
+    var date={girls:[]};
+    var date_date=[];
+    var r=[];
+    var map=new Map();
+    var map_title=new Map();
+    function change(title){
+      $("#graphName").text(title+ "운동 기록");
+    }
+    $(function(){
+
+      var length=document.getElementsByClassName("create_time").length;
+      var fahrenheit = [0, 32, 45, 50, 75, 80, 99, 120];
+
+      var celcius = fahrenheit.map(function(elem) {
+          return Math.round((elem - 32) * 5 / 9);
+      });
+      console.log("celcius : "+celcius);
+      // ES6
+      // fahrenheit.map(elem => Math.round((elem - 32) * 5 / 9));
+
+  if(length!=0){
+
+    for(var i=0; i<length; i++){
+      array_date.push(document.getElementsByClassName("create_time")[i].value)
+      array_time.push(document.getElementsByClassName("time")[i].value)
+      array_title.push(document.getElementsByClassName("title")[i].value)
+
+      displayed_date.push(array_date[i]);
+
+
+      var test =displayed_date.filter(function(value,index,self){
+         return (self.indexOf(value) !== index )})
+      var cleanArray = displayed_date.filter((value,index,self)=>{ return (self.indexOf(value) === index )});
+
+
+    };
+        //날짜별 총 운동 시간 산출.
+          		for (var i = 0; i < array_date.length; i++) {
+          			if(map.get(array_date[i]) == null){
+          				map.set(array_date[i], array_time[i]);
+          			}else{
+          				map.set(array_date[i], parseInt(map.get(array_date[i])) + parseInt(array_time[i]) + "");
+          			}
+          		}
+              var count=-1;
+              var count_title=-1;
+              map.forEach(function(value, key,index) {
+                count++
+                console.log(key + ' = ' + value+"index : "+count);
+                myLineChart.data.labels[count] = key;
+                myLineChart.data.datasets[0].data[count] = value;
+                myLineChart.update();
+
+              });
+          		console.log("rrrr:"+map.get("2017/06/26"));
+              //운동별 운동시간 산출
+              for (var i = 0; i < array_title.length; i++) {
+          			if(map_title.get(array_title[i]) == null){
+          				map_title.set(array_title[i], array_time[i]);
+          			}else{
+          				map_title.set(array_title[i], parseInt(map_title.get(array_title[i])) + parseInt(array_time[i]) + "");
+          			}
+          		}
+              console.log("운동별 운동시간 : "+map_title.get("자전거"))
+              map_title.forEach(function(value, key,index) {
+                count_title++
+                console.log(key + ' = ' + value+"index : "+count_title);
+
+                myPieChart.data.labels[count_title] = key;
+                myPieChart.data.datasets[0].data[count_title] = value;
+                myPieChart.update();
+              });
+    console.log("result23 : "+cleanArray);
+      console.log("j루프 끝"+displayed_date)
+      console.log("array_time : "+array_time);
+      for(var i=0; i<displayed_date.length; i++){
+        date.girls.push({
+          date : displayed_date[i],
+          time : array_time[i]
+        })
+      }
+      console.log(date.girls);
+      console.log(date.girls.length);
+      console.log(date.girls[0].date)
+      var plus=[];
+      var a;
+for(var i=0; i<date.girls.length; i++){
+//  date_date.push({displayed_date[i]:array_time[i]});
+}
+var obj = array_date;
+for (var i = 0 in obj) {
+  console.log("rr:"+obj[i]);
+}
+      console.log("aaaaaa"+date_date);
+    // for(var i=0; i<date.girls.length; i++){
+    //   for(var j=0; j<cleanArray.length; j++){
+    //     if(cleanArray[j]==date.girls[i].date){
+    //       console.log("matched : "+cleanArray[j])
+    //       console.log(date.girls[i].time);
+    //       date.girls[i].time=parseInt(date.girls[i].time);
+    //
+    //       for(var k=0; k<cleanArray.length; k++){
+    //         console.log("cleanarray : "+cleanArray[k]);
+    //         if(cleanArray[j]==cleanArray[k]){
+    //           if(map.get(cleanArray[k])){
+    //             console.log(true+"clean array k : "+cleanArray[k]);
+    //             a=map.get(cleanArray[k])
+    //             console.log("a value : "+a);
+    //             map.set(cleanArray[k],a);
+    //           }
+    //           if(map.get("hahaha")){
+    //             console.log(false);
+    //           }
+    //           map.set(cleanArray[k],date.girls[i].time);
+    //           console.log(map.get(cleanArray[k]))
+    //           plus=plus+date.girls[i].time;
+    //         }
+    //         console.log("mapsize : "+map.size);
+    //         console.log("map : "+map.get("2017/06/27"));
+    //         cleanArray[k].concat(date.girls[i].time);
+    //       }
+    //       console.log("concated : "+cleanArray);
+    //     }
+    //     console.log("plused : "+plus);
+    //   }
+    // }
+  }
+    })
+    var canvas = document.getElementById('myChart');
 var data = {
-	labels: ["1월", "2월", "3월", "4월", "5월", "6월"],
+	 labels: [],
 	datasets: [
 		{
-			label: "My First dataset",
-			fillColor: "rgba(150,200,250,0.5)",
-			strokeColor: "rgba(150,200,250,0.8)",
-			highlightFill: "rgba(150,200,250,0.75)",
-			highlightStroke: "rgba(150,200,250,1)",
-			data: [65, 59, 80, 81, 56, 55]
+      label: "My First dataset",
+           fill: false,
+           lineTension: 0.1,
+           backgroundColor: "rgba(75,192,192,0.4)",
+           borderColor: "rgba(75,192,192,1)",
+           borderCapStyle: 'butt',
+           borderDash: [],
+           borderDashOffset: 0.0,
+           borderJoinStyle: 'miter',
+           pointBorderColor: "rgba(75,192,192,1)",
+           pointBackgroundColor: "#fff",
+           pointBorderWidth: 1,
+           pointHoverRadius: 5,
+           pointHoverBackgroundColor: "rgba(75,192,192,1)",
+           pointHoverBorderColor: "rgba(220,220,220,1)",
+           pointHoverBorderWidth: 2,
+           pointRadius: 5,
+           pointHitRadius: 10,
+           data: [],
 		}
 	]
 };
 var options = {	animation: false };
 var ctx = $('#myChart').get(0).getContext('2d');
 var t='bar';
-var myBarChart = new Chart(ctx, {
-    type: t,
-    data: data,
+var myLineChart = Chart.Line(canvas,{
+	data:data,
+  options:options
+});
+var ctx = $('#myPie').get(0).getContext('2d');
+data_pie = {
+    datasets: [{
+        backgroundColor: [
+       "#2ecc71",
+       "#3498db",
+       "#95a5a6"
+
+     ]
+    }],
+
+
+};
+var myPieChart = new Chart(ctx,{
+    type: 'pie',
+    data: data_pie,
     options: options
 });
-
 </script>
+
+
+{{#result }}
+{{#each girls}}
+
+  <input type="hidden" id="chan" class="title" name="" value="{{this.title}}" onchange="chan();">
+  <input type="hidden" id="chan" class="time" name="" value="{{this.time}}" onchange="chan();">
+  <input type="hidden" id="chan" class="create_time" name="" value="{{this.create_time}}" onchange="chan();">
+{{/each}}
+
+{{/result}}
   </body>
 </html>
