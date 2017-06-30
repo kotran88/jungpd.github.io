@@ -9,32 +9,74 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
       </head>
+      <style media="screen">
+      #graphName{
+        vertical-align: middle;
+        margin:auto;
+        line-height: 45px;
+      }
+      ul{
+        list-style-type: none;
+      }
+      p.my_exer{
+        float:left;
+        line-height: 45px;
+        padding: 15px;
+        font-size:20px;
+      }
+        li{
+          float:left;
+          margin:5px 20px;
+          padding:15px;
+        }
+        a{
+          display: block;
+          padding: 0 13px;
+          height: 37px;
+          background: #ff0;
+          -webkit-border-radius: 19px;
+          -moz-border-radius: 19px;
+          border-radius: 19px;
+          width: 100px;
+          font-family: "yg740";
+          font-size: 14px;
+          line-height: 37px;
+        }
+        .center{
+          text-align: center;
+          border: 3px solid green;
+        }
+        .hot_keyword{
+          background: #e7e7e7;
+          overflow: hidden;
+          padding:0 20px 0 40px;
+          text-align: center;
+          border-radius: 8px;
+        }
+      </style>
       <script src="//cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js"></script>
   <body>
+<div class="center">
+  <p id="graphName">{{nickname}} 님의 {{title}}</p>
+</div>
 
-    {{nickname}}
-
-
-<hr>
-<p id="graphName">총 운동 시간 그래프</p>
 <canvas id="myChart" width="300" height="200"></canvas>
 <hr>
-
+<div class="hot_keyword">
+  <p class="my_exer">내가 한 운동 : </p> <ul><li><a href="/stat/kotran/all">#전체보기</a></li> {{#each exercise_total}}<li><a href="/stat/kotran/{{this}}">#{{this}}</a></li>{{/each}}</ul>
+</div>
+<br><br><br><br>
 <div class="table-responsive">
   <table class="table">
   <tr>
-<td>운동명</td>
 <td>운동시간</td>
-<td>횟수</td>
 <td>운동일</td>
   </tr>
 
 {{#result }}
 {{#each girls}}
-<tr onclick="javascript:change('{{this.title}}')">
-  <td>{{this.title}}</td>
+<tr >
   <td>{{this.time}}</td>
-  <td>dddd</td>
   <td>{{this.create_time}}</td>
 </tr>
 {{/each}}
@@ -52,6 +94,11 @@
     var array_date=[];
     var array_time=[];
     var array_title=[];
+
+    var array_date2=[];
+    var array_time2=[];
+    var array_title2=[];
+
     var date={girls:[]};
     var date_date=[];
     var r=[];
@@ -59,33 +106,68 @@
     var map_title=new Map();
     function change(title){
       $("#graphName").text(title+ "운동 기록");
+      location.href="/stat/kotran/"+title;
     }
     $(function(){
+      console.log("시작");
+        console.log("리다이렉트");
+
+
 
       var length=document.getElementsByClassName("create_time").length;
+      var length2=document.getElementsByClassName("title_pie").length;
+      if(length==0){
+        location.href="/stat/kotran/all";
+      }
       var fahrenheit = [0, 32, 45, 50, 75, 80, 99, 120];
 
       var celcius = fahrenheit.map(function(elem) {
           return Math.round((elem - 32) * 5 / 9);
       });
       console.log("celcius : "+celcius);
+      console.log("length : "+length);
       // ES6
       // fahrenheit.map(elem => Math.round((elem - 32) * 5 / 9));
 
   if(length!=0){
+    for(var i=0; i<length2; i++){
+      console.log("i : "+i);
+      array_title2.push(document.getElementsByClassName("title_pie")[i].value)
+      array_time2.push(document.getElementsByClassName("time_pie")[i].value)
+      array_date2.push(document.getElementsByClassName("create_time_pie")[i].value)
+      console.log("rrrr:"+array_title2);
+      for (var i = 0; i < array_title2.length; i++) {
+        if(map_title.get(array_title2[i]) == null){
+          map_title.set(array_title2[i], array_time2[i]);
+        }else{
+          map_title.set(array_title2[i], parseInt(map_title.get(array_title2[i])) + parseInt(array_time2[i]) + "");
+        }
+      }
+      console.log("운동별 운동시간 : "+map_title.get("자전거"))
+      var count_title=-1;
+      map_title.forEach(function(value, key,index) {
+        count_title++
+        console.log(key + ' = ' + value+"index : "+count_title);
 
+        myPieChart.data.labels[count_title] = key;
+        myPieChart.data.datasets[0].data[count_title] = value;
+        myPieChart.update();
+      });
+    }
     for(var i=0; i<length; i++){
       array_date.push(document.getElementsByClassName("create_time")[i].value)
       array_time.push(document.getElementsByClassName("time")[i].value)
       array_title.push(document.getElementsByClassName("title")[i].value)
 
+
       displayed_date.push(array_date[i]);
 
-
+      console.log("DD :"+displayed_date)
       var test =displayed_date.filter(function(value,index,self){
          return (self.indexOf(value) !== index )})
-      var cleanArray = displayed_date.filter((value,index,self)=>{ return (self.indexOf(value) === index )});
 
+      var cleanArray = displayed_date.filter((value,index,self)=>{ return (self.indexOf(value) === index )});
+ console.log("DD2 :"+cleanArray)
 
     };
         //날짜별 총 운동 시간 산출.
@@ -100,30 +182,15 @@
               var count_title=-1;
               map.forEach(function(value, key,index) {
                 count++
-                console.log(key + ' = ' + value+"index : "+count);
-                myLineChart.data.labels[count] = key;
-                myLineChart.data.datasets[0].data[count] = value;
+                console.log(key + ' = ' + value+"index : "+count+"size : "+(map.size-count-1));
+                myLineChart.data.labels[map.size-count-1] = key;
+                myLineChart.data.datasets[0].data[map.size-count-1] = value;
                 myLineChart.update();
 
               });
-          		console.log("rrrr:"+map.get("2017/06/26"));
-              //운동별 운동시간 산출
-              for (var i = 0; i < array_title.length; i++) {
-          			if(map_title.get(array_title[i]) == null){
-          				map_title.set(array_title[i], array_time[i]);
-          			}else{
-          				map_title.set(array_title[i], parseInt(map_title.get(array_title[i])) + parseInt(array_time[i]) + "");
-          			}
-          		}
-              console.log("운동별 운동시간 : "+map_title.get("자전거"))
-              map_title.forEach(function(value, key,index) {
-                count_title++
-                console.log(key + ' = ' + value+"index : "+count_title);
 
-                myPieChart.data.labels[count_title] = key;
-                myPieChart.data.datasets[0].data[count_title] = value;
-                myPieChart.update();
-              });
+              //운동별 운동시간 산출
+
     console.log("result23 : "+cleanArray);
       console.log("j루프 끝"+displayed_date)
       console.log("array_time : "+array_time);
@@ -234,7 +301,7 @@ var myPieChart = new Chart(ctx,{
 });
 </script>
 
-
+<input type="hidden" id="type" name="type" value="{{title}}">
 {{#result }}
 {{#each girls}}
 
@@ -244,5 +311,14 @@ var myPieChart = new Chart(ctx,{
 {{/each}}
 
 {{/result}}
+{{#results }}
+{{#each results}}
+
+  <input type="hidden" id="chan" class="title_pie" name="" value="{{this.title}}" onchange="chan();">
+  <input type="hidden" id="chan" class="time_pie" name="" value="{{this.time}}" onchange="chan();">
+  <input type="hidden" id="chan" class="create_time_pie" name="" value="{{this.create_time}}" onchange="chan();">
+{{/each}}
+
+{{/results}}
   </body>
 </html>

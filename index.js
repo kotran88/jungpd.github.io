@@ -124,6 +124,8 @@ app.get("/stat/:nickname/:type",function(req,res){
 	var dd = today.getDate();
 	var mm = today.getMonth()+1; //January is 0!
   var data={girls:[]};
+  var result={results:[]};
+  var total=[];
 	var yyyy = today.getFullYear();
 	var time=new Date().toLocaleTimeString('en-US', { hour12: false,
 																						hour: "numeric",
@@ -136,72 +138,81 @@ app.get("/stat/:nickname/:type",function(req,res){
 	}
 	var today = yyyy+'/'+mm+'/'+dd+' '+time;
   console.log("nickname : "+req.params.nickname);
-
+  var array_date=[];
+  var array_time=[];
+  var array_title=[];
+  var cleanArray=[];
+  var title;
+    var map=new Map();
   ref=firebase.database().ref('statistic');
   ref.on('child_added',function(snap){
     console.log('value : '+snap.val());
     var name=snap.val().title;
     var user_id=snap.val().user_id;
     var time=snap.val().time;
+
     var create_date=snap.val().create_date;
+
+
+
+
+
     if(user_id==req.params.nickname){
+
         console.log("type : "+type)
+        array_title.push(name);
+         cleanArray = array_title.filter((value,index,self)=>{ return (self.indexOf(value) === index )});
+         console.log("운동 수는 : "+cleanArray)
       if(type=='all'){
         console.log("dd"+name+"userid : "+user_id+"time : "+time+"createdate:"+create_date);
         array_time.push(time);
-        console.log("time : "+array_time+"length : "+array_time);
-        data.girls.push({
+
+        array_date.push(create_date);
+        title="총 운동 시간 통계"
+        result.results.push({
           time: time,
-          title:name,
-          user_id:user_id,
+          title: name,
+          user_id:req.params.nickname,
           create_time:create_date
         })
+
+
+
       }else{
 
         if(name==type){
-          data.girls.push({
-            time: time,
-            title:name,
-            user_id:user_id,
-            create_time:create_date
-          })
+          title=name+"기록"
+          array_time.push(time);
+          array_date.push(create_date);
+
         }
+        //else end
       }
-
-
     }
-
-
   })
-  // var result88 = {
-  //   results:[{
-  //     day: "Monday",
-  //      vehicles: [{vehicle: "Number 1", driver: "Jack_Franklin", events: "pick up trailer"}]
-  //   },{
-  //     day: "Tuesday",
-  //      vehicles: [{vehicle: "Number 1", driver: "Jack_Franklin", events: "pick up trailer"}]
-  //   }]
-  // var result88=  {
-  //       days: [{
-  //           day: "Monday",
-  //           vehicles: [{vehicle: "Number 1", driver: "Jack_Franklin", events: "pick up trailer"}]
-  //       }, {
-  //           day: "Tuesday",
-  //           vehicles: [{vehicle: "Number 1", driver: "Jack_Franklin", events: "pick up trailer"}]
-  //       }]
-  //   }
-  // result99=JSON.stringify(result88);
+console.log("length : "+array_date.length)
+  ;
+  for (var i = 0; i < array_date.length; i++) {
+    if(map.get(array_date[i]) == null){
+      map.set(array_date[i], array_time[i]);
+    }else{
+      map.set(array_date[i], parseInt(map.get(array_date[i])) + parseInt(array_time[i]) + "");
+    }
+  }
+  var count=-1;
+  map.forEach(function(value, key,index) {
+    count++
+    console.log(key + ' = ' + value+"index : "+count+"size : "+(map.size-count-1));
+    data.girls.push({
+      time: value,
+      create_time:key
+    })
+
+  });
+console.log("result :"+result.results);
 console.log("result 88 : "+data);
-  res.render("result",{nickname:req.params.nickname,result:data})
-//   client.query('insert into user(id,nick,conn_date) values("test","'+req.params.nickname+'","'+today+'")',function(error,result){
-//          if(error){
-//                  console.log("error:"+error);
-//          }else{
-//          console.log("result : "+result);
-//          res.render("result",{result:req.params.nickname})
-//          }
-//
-// })
+  res.render("result",{nickname:req.params.nickname,result:data,exercise_total:cleanArray,title:title,results:result})
+
 });
 
 app.get("/register",function(req,res){
