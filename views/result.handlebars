@@ -24,10 +24,12 @@
         padding: 15px;
         font-size:20px;
       }
+      tr{
+        text-align: center;
+      }
         li{
           float:left;
-          margin:5px 20px;
-          padding:15px;
+          margin:5px 5px;
         }
         a{
           display: block;
@@ -63,7 +65,7 @@
 <canvas id="myChart" width="300" height="200"></canvas>
 <hr>
 <div class="hot_keyword">
-  <p class="my_exer">내가 한 운동 : </p> <ul><li><a href="/stat/kotran/all">#전체보기</a></li> {{#each exercise_total}}<li><a href="/stat/kotran/{{this}}">#{{this}}</a></li>{{/each}}</ul>
+  <ul><li><a href="/stat/kotran/all">#전체보기</a></li> {{#each exercise_total}}<li><a href="/stat/kotran/{{this}}">#{{this}}</a></li>{{/each}}</ul>
 </div>
 <br><br><br><br>
 <div class="table-responsive">
@@ -76,7 +78,7 @@
 {{#result }}
 {{#each girls}}
 <tr >
-  <td>{{this.time}}</td>
+  <td>{{this.time}} 초</td>
   <td>{{this.create_time}}</td>
 </tr>
 {{/each}}
@@ -171,7 +173,7 @@
 
     };
         //날짜별 총 운동 시간 산출.
-          		for (var i = 0; i < array_date.length; i++) {
+          		for (var i = 0; i <array_date.length; i++) {
           			if(map.get(array_date[i]) == null){
           				map.set(array_date[i], array_time[i]);
           			}else{
@@ -182,9 +184,9 @@
               var count_title=-1;
               map.forEach(function(value, key,index) {
                 count++
-                console.log(key + ' = ' + value+"index : "+count+"size : "+(map.size-count-1));
-                myLineChart.data.labels[map.size-count-1] = key;
-                myLineChart.data.datasets[0].data[map.size-count-1] = value;
+                console.log("ssss"+key + ' = ' + value+"index : "+count+"size : "+(map.size-count-1));
+                myLineChart.data.labels[count] = key;
+                myLineChart.data.datasets[0].data[count] = value;
                 myLineChart.update();
 
               });
@@ -252,7 +254,7 @@ var data = {
 	 labels: [],
 	datasets: [
 		{
-      label: "My First dataset",
+      label: "Exercise Graph",
            fill: false,
            lineTension: 0.1,
            backgroundColor: "rgba(75,192,192,0.4)",
