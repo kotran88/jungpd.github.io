@@ -1,0 +1,42 @@
+[debug] [2017-07-10T07:09:27.101Z] ----------------------------------------------------------------------
+[debug] [2017-07-10T07:09:27.106Z] Command:      C:\Program Files\nodejs\node.exe C:\Users\kotra\AppData\Roaming\npm\node_modules\firebase-tools\bin\firebase init
+[debug] [2017-07-10T07:09:27.107Z] CLI Version:  3.9.1
+[debug] [2017-07-10T07:09:27.107Z] Platform:     win32
+[debug] [2017-07-10T07:09:27.107Z] Node Version: v8.1.0
+[debug] [2017-07-10T07:09:27.108Z] Time:         Mon Jul 10 2017 16:09:27 GMT+0900 (대한민국 표준시)
+[debug] [2017-07-10T07:09:27.108Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2017-07-10T07:09:27.126Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase"]
+[debug] [2017-07-10T07:09:27.127Z] > authorizing via signed-in user
+[info] 
+     ######## #### ########  ######## ########     ###     ######  ########
+     ##        ##  ##     ## ##       ##     ##  ##   ##  ##       ##
+     ######    ##  ########  ######   ########  #########  ######  ######
+     ##        ##  ##    ##  ##       ##     ## ##     ##       ## ##
+     ##       #### ##     ## ######## ########  ##     ##  ######  ########
+
+You're about to initialize a Firebase project in this directory:
+
+  C:\Users\kotra\OneDrive\Documents\jungpd.github.io
+
+[debug] [2017-07-10T07:09:44.057Z] ----------------------------------------------------------------------
+[debug] [2017-07-10T07:09:44.059Z] Command:      C:\Program Files\nodejs\node.exe C:\Users\kotra\AppData\Roaming\npm\node_modules\firebase-tools\bin\firebase init
+[debug] [2017-07-10T07:09:44.060Z] CLI Version:  3.9.1
+[debug] [2017-07-10T07:09:44.060Z] Platform:     win32
+[debug] [2017-07-10T07:09:44.060Z] Node Version: v8.1.0
+[debug] [2017-07-10T07:09:44.061Z] Time:         Mon Jul 10 2017 16:09:44 GMT+0900 (대한민국 표준시)
+[debug] [2017-07-10T07:09:44.061Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2017-07-10T07:09:44.079Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase"]
+[debug] [2017-07-10T07:09:44.080Z] > authorizing via signed-in user
+[info] 
+     ######## #### ########  ######## ########     ###     ######  ########
+     ##        ##  ##     ## ##       ##     ##  ##   ##  ##       ##
+     ######    ##  ########  ######   ########  #########  ######  ######
+     ##        ##  ##    ##  ##       ##     ## ##     ##       ## ##
+     ##       #### ##     ## ######## ########  ##     ##  ######  ########
+
+You're about to initialize a Firebase project in this directory:
+
+  C:\Users\kotra\OneDrive\Documents\jungpd.github.io
+
